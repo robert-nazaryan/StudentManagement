@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lessons</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Lessons Page</h1>
+<h3><a href="/lessons/add">Add Lesson</a></h3>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Price</th>
+        <th>Start Date</th>
+        <th>Teacher Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="lesson : ${lessons}">
+        <td th:text="${lesson.title}"></td>
+        <td th:text="${lesson.duration}"></td>
+        <td th:text="${lesson.price}"></td>
+        <td th:text="${lesson.startDate}"></td>
+        <td th:text="${lesson.teacher.name}"></td>
+        <td><a th:href="@{'/lessons/update/'+${lesson.id}}">update</a></td>
+        <td><a th:href="@{'/lessons/delete/'+${lesson.id}}">delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

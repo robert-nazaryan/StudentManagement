@@ -1,0 +1,16 @@
+th, td {
+    border: black solid 2px;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+}
+
+input, select, option {
+    width: 200px;
+    height: 40px;
+}
+
+img {
+    height: 40px;
+    width: auto;
+}

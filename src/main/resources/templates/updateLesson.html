@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Lesson</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h1>Update Lesson Page</h1>
+
+<form action="/lessons/update" method="post">
+    <input type="hidden" name="id" th:value="${lesson.id}">
+    <input required type="text" placeholder="Title" name="title" th:value="${lesson.title}"><br>
+    <input required type="number" step="any" placeholder="Duration" name="duration" th:value="${lesson.duration}"><br>
+    <input required type="number" step="any" placeholder="Price" name="price" th:value="${lesson.price}"><br>
+    <input required type="date" name="startDate" th:value="${lesson.startDate}"><br>
+    <select name="teacher.id">
+        <option th:each="teacher : ${teachers}" th:text="${teacher.name}" th:value="${teacher.id}"
+                th:selected="${teacher.id == lesson.teacher.id}"></option>
+    </select><br>
+    <input type="submit" value="update">
+</form>
+
+</body>
+</html>

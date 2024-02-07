@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Messages Page</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Message</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Date Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.message}"></td>
+        <td th:text="${message.fromId}"></td>
+        <td th:text="${message.toId}"></td>
+        <td th:text="${message.dateTime}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

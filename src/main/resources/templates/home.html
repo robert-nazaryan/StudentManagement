@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<h1>
+    <a href="/students">Students</a>
+    <span> | </span>
+    <a href="/teachers" th:if="${currentUser.type.name() == 'TEACHER'}">Teachers</a>
+    <span th:if="${currentUser.type.name() == 'TEACHER'}"> | </span>
+    <a href="/messages">Messages</a>
+    <span>  |  </span>
+    <a href="/lessons">Lessons</a>
+</h1><br>
+
+<h3><a href="/logout">Logout</a></h3>
+
+</body>
+</html>

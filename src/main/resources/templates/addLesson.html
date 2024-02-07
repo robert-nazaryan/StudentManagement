@@ -12,9 +12,6 @@
     <input required type="number" step="any" placeholder="Duration" name="duration"><br>
     <input required type="number" step="any" placeholder="Price" name="price"><br>
     <input required type="date" name="startDate"><br>
-    <select name="teacher.id">
-        <option th:each="teacher : ${teachers}" th:text="${teacher.name}" th:value="${teacher.id}"></option>
-    </select><br>
     <input type="submit" value="add">
 </form>
 </body>

@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Students Page</h1>
-<h3><a href="/students/add">Add Student</a></h3>
+<h3 th:if="${currentUser.type == 'TEACHER'}"><a href="/students/add">Add Student</a></h3>
 <table>
     <thead>
     <tr>
@@ -16,8 +16,9 @@
         <th>Surname</th>
         <th>Email</th>
         <th>Lesson</th>
-        <th>Update</th>
-        <th>Delete</th>
+        <th>Send Message</th>
+        <th th:if="${currentUser.type.name() == 'TEACHER'}">Update</th>
+        <th th:if="${currentUser.type.name() == 'TEACHER'}">Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -30,8 +31,11 @@
         <td th:text="${student.surname}"></td>
         <td th:text="${student.email}"></td>
         <td th:text="${student.lesson.title}"></td>
-        <td><a th:href="@{'/students/update/'+${student.id}}">update</a></td>
-        <td><a th:href="@{'/students/delete/'+${student.id}}">delete</a></td>
+        <th><a th:if="${currentUser.id != student.id}" th:href="@{'/message/send/'+${student.id}}">send message</a></th>
+        <td th:if="${currentUser.type.name() == 'TEACHER'}"><a th:href="@{'/students/update/'+${student.id}}">update</a>
+        </td>
+        <td th:if="${currentUser.type.name() == 'TEACHER'}"><a th:href="@{'/students/delete/'+${student.id}}">delete</a>
+        </td>
     </tr>
     </tbody>
 </table>

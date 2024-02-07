@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h1>Student Register</h1><br>
+
+<h2 th:if="${msg != null}" th:text="${msg}" style="color:red;"></h2>
+
+<form action="/student/register" method="post" enctype="multipart/form-data">
+    <input type="text" required placeholder="Name" name="name"><br>
+    <input type="text" required placeholder="Surname" name="surname"><br>
+    <input type="text" required placeholder="Email" name="email"><br>
+    <input type="password" required placeholder="Password" name="password"><br>
+    <select name="lesson.id">
+        <option th:each="lesson : ${lessons}" th:text="${lesson.title}" th:value="${lesson.id}"></option>
+    </select><br>
+    <input type="file" name="picture"><br>
+    <input type="submit" value="Register">
+</form>
+
+</body>
+</html>

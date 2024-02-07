@@ -1,58 +1,57 @@
 package org.example.studentmanagement.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.studentmanagement.emun.UserType;
 import org.example.studentmanagement.entity.Lesson;
 import org.example.studentmanagement.entity.User;
-import org.example.studentmanagement.repository.LessonRepository;
-import org.example.studentmanagement.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.studentmanagement.service.LessonService;
+import org.example.studentmanagement.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
 public class LessonController {
-    @Autowired
-    private LessonRepository lessonRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final LessonService lessonService;
+    private final UserService userService;
 
     @GetMapping("/lessons")
-    public String lessonsPage(ModelMap modelMap) {
-        modelMap.put("lessons", lessonRepository.findAll());
+    public String lessonsPage(ModelMap modelMap, @ModelAttribute("currentUser") User currentUser) {
+        if (currentUser.getType() == UserType.TEACHER) {
+            modelMap.addAttribute("lessons", lessonService.findAll());
+        } else {
+            modelMap.addAttribute("lessons", lessonService.findById(currentUser.getLesson().getId()));
+        }
         return "lessons";
     }
 
     @GetMapping("/lessons/add")
-    public String addLessonsPage(ModelMap modelMap) {
-        modelMap.put("teachers", userRepository.findAllByType(UserType.TEACHER));
+    public String addLessonsPage() {
         return "addLesson";
     }
 
     @PostMapping("/lessons/add")
-    public String addLesson(@ModelAttribute Lesson lesson) {
-        lessonRepository.save(lesson);
+    public String addLesson(@ModelAttribute Lesson lesson, @ModelAttribute("currentUser") User currentUser) {
+        lesson.setTeacher(currentUser);
+        lessonService.save(lesson);
         return "redirect:/lessons";
     }
 
     @GetMapping("/lessons/delete/{id}")
     public String deleteTeacher(@PathVariable("id") int id) {
-        lessonRepository.deleteById(id);
+        lessonService.deleteById(id);
         return "redirect:/lessons";
     }
 
     @GetMapping("/lessons/update/{id}")
     public String updateTeacherPage(@PathVariable("id") int id, ModelMap modelMap) {
-        Optional<Lesson> byId = lessonRepository.findById(id);
+        Optional<Lesson> byId = lessonService.findById(id);
         if (byId.isPresent()) {
             modelMap.put("lesson", byId.get());
-            modelMap.put("teachers", userRepository.findAllByType(UserType.TEACHER));
         } else {
             return "redirect:/lessons";
         }
@@ -60,8 +59,11 @@ public class LessonController {
     }
 
     @PostMapping("/lessons/update")
-    public String updateTeacher(@ModelAttribute Lesson lesson) {
-        lessonRepository.save(lesson);
+    public String updateTeacher(@ModelAttribute Lesson lesson, @RequestParam("lessonId") int lessonId,
+                                @ModelAttribute("currentUser") User currentUser) {
+        lesson.setId(lessonId);
+        lesson.setTeacher(currentUser);
+        lessonService.save(lesson);
         return "redirect:/lessons";
     }
 }

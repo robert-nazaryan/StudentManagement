@@ -22,7 +22,7 @@ public class MainController {
         return "main";
     }
 
-    @GetMapping(value = "getPicture", produces= MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "getPicture", produces = MediaType.IMAGE_PNG_VALUE)
     public @ResponseBody byte[] getPicture(@RequestParam("picName") String picName) throws IOException {
         File file = new File(uploadDirectory, picName);
         if (file.exists()) {

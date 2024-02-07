@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Send Message</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<h1>Send Message Page</h1>
+
+<form action="/message/send" method="post">
+    <input type="hidden" name="toId" th:value="${toId}">
+    <input type="text" placeholder="Message" name="messageText">
+    <input type="submit" value="send">
+</form>
+
+</body>
+</html>

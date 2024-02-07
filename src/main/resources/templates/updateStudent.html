@@ -9,11 +9,12 @@
 
 <h1>Add Student Page</h1>
 
-<form action="/students/add" method="post" enctype="multipart/form-data">
+<form action="/students/update" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" th:value="${student.id}">
     <input required type="text" placeholder="Name" name="name" th:value="${student.name}"><br>
     <input required type="text" placeholder="Surname" name="surname" th:value="${student.surname}"><br>
     <input required type="email" placeholder="Email" name="email" th:value="${student.email}"><br>
+    <input type="hidden" name="password" th:value="${student.password}">
     <select name="lesson.id">
         <option th:each="lesson : ${lessons}" th:text="${lesson.title}" th:value="${lesson.id}"
                 th:selected="${lesson.id == student.lesson.id}"></option>

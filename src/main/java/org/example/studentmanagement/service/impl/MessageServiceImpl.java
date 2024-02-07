@@ -3,8 +3,8 @@ package org.example.studentmanagement.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.example.studentmanagement.entity.Message;
 import org.example.studentmanagement.repository.MessageRepository;
+import org.example.studentmanagement.repository.UserRepository;
 import org.example.studentmanagement.service.MessageService;
-import org.example.studentmanagement.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +15,11 @@ public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Override
-    public void save(Message message) {
+    public void save(Message message, int toUserId) {
+        message.setToUser(userRepository.findById(toUserId).get());
         messageRepository.save(message);
     }
 
@@ -28,8 +29,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> findAllByToId(int id) {
-        return messageRepository.findAllByToId(id);
+    public List<Message> findAllByToUserId(int id) {
+        return messageRepository.findAllByToUserId(id);
     }
 
 }

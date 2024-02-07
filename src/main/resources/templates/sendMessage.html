@@ -10,7 +10,7 @@
 <h1>Send Message Page</h1>
 
 <form action="/message/send" method="post">
-    <input type="hidden" name="toId" th:value="${toId}">
+    <input type="hidden" name="toUserId" th:value="${toUserId}">
     <input type="text" placeholder="Message" name="messageText">
     <input type="submit" value="send">
 </form>

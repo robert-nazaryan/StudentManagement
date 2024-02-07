@@ -22,27 +22,26 @@ public class MessageController {
         if (currentUser.getType() == UserType.TEACHER) {
             modelMap.addAttribute("messages", messageService.findAll());
         } else {
-            modelMap.addAttribute("messages", messageService.findAllByToId(currentUser.getId()));
+            modelMap.addAttribute("messages", messageService.findAllByToUserId(currentUser.getId()));
         }
         return "messages";
     }
 
     @GetMapping("/message/send/{id}")
     public String sendMessagePage(@PathVariable("id") int id, ModelMap modelMap) {
-        modelMap.addAttribute("toId", id);
+        modelMap.addAttribute("toUserId", id);
         return "sendMessage";
     }
 
     @PostMapping("/message/send")
     public String sendMessage(@ModelAttribute("currentUser") User currentUser,
                               @RequestParam("messageText") String messageText,
-                              @RequestParam("toId") int toId) {
+                              @RequestParam("toUserId") int toUserId) {
         Message message = new Message();
         message.setMessage(messageText);
-        message.setToId(toId);
-        message.setFromId(currentUser.getId());
+        message.setFromUser(currentUser);
         message.setDateTime(new Date(new java.util.Date().getTime()));
-        messageService.save(message);
+        messageService.save(message, toUserId);
         return "redirect:/students";
     }
 }

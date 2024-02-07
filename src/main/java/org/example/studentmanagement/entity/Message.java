@@ -17,9 +17,11 @@ public class Message {
 
     private String message;
 
-    private int fromId;
+    @ManyToOne
+    private User fromUser;
 
-    private int toId;
+    @ManyToOne
+    private User toUser;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date dateTime;

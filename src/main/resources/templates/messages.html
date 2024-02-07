@@ -20,8 +20,8 @@
     <tbody>
     <tr th:each="message : ${messages}">
         <td th:text="${message.message}"></td>
-        <td th:text="${message.fromId}"></td>
-        <td th:text="${message.toId}"></td>
+        <td th:text="${message.fromUser.name}"></td>
+        <td th:text="${message.toUser.name}"></td>
         <td th:text="${message.dateTime}"></td>
     </tr>
     </tbody>

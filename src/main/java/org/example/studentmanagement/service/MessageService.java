@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface MessageService {
 
-    void save(Message message);
+    void save(Message message, int toUserId);
 
     List<Message> findAll();
 
-    List<Message> findAllByToId(int id);
+    List<Message> findAllByToUserId(int id);
 
 }

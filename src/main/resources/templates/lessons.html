@@ -27,8 +27,10 @@
         <td th:text="${lesson.price}"></td>
         <td th:text="${lesson.startDate}"></td>
         <td th:text="${lesson.teacher.name}"></td>
-        <td th:if="${currentUser.type.name() == 'TEACHER'}"><a th:href="@{'/lessons/update/'+${lesson.id}}">update</a></td>
-        <td th:if="${currentUser.type.name() == 'TEACHER'}"><a th:href="@{'/lessons/delete/'+${lesson.id}}">delete</a></td>
+        <td th:if="${currentUser.type.name() == 'TEACHER'}"><a th:href="@{'/lessons/update/'+${lesson.id}}">update</a>
+        </td>
+        <td th:if="${currentUser.type.name() == 'TEACHER'}"><a th:href="@{'/lessons/delete/'+${lesson.id}}">delete</a>
+        </td>
     </tr>
     </tbody>
 </table>

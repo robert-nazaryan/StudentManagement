@@ -24,7 +24,7 @@ public class LessonController {
         if (currentUser.getType() == UserType.TEACHER) {
             modelMap.addAttribute("lessons", lessonService.findAll());
         } else {
-            modelMap.addAttribute("lessons", lessonService.findById(currentUser.getLesson().getId()));
+            modelMap.addAttribute("lessons", currentUser.getLesson());
         }
         return "lessons";
     }

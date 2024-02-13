@@ -11,7 +11,7 @@
 
 <h2 th:if="${msg != null}" th:text="${msg}" style="color:red;"></h2>
 
-<form action="/login" method="post">
+<form action="/users/login" method="post">
     <input type="text" required placeholder="Email" name="username"><br>
     <input type="password" required placeholder="Password" name="password"><br>
     <input type="submit" value="Login">

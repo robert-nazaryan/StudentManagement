@@ -7,9 +7,9 @@
 <body>
 
 <h1>
-    <a href="/students">Students</a>
+    <a href="/users/students">Students</a>
     <span> | </span>
-    <a href="/teachers" th:if="${currentUser.type.name() == 'TEACHER'}">Teachers</a>
+    <a href="/users/teachers" th:if="${currentUser.type.name() == 'TEACHER'}">Teachers</a>
     <span th:if="${currentUser.type.name() == 'TEACHER'}"> | </span>
     <a href="/messages">Messages</a>
     <span>  |  </span>

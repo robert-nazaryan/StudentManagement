@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 
 @Controller
+@RequestMapping("/messages")
 @RequiredArgsConstructor
 public class MessageController {
 
     private final MessageService messageService;
 
-    @GetMapping("/messages")
+    @GetMapping("")
     public String messagesPage(@ModelAttribute("currentUser") User currentUser, ModelMap modelMap) {
         if (currentUser.getType() == UserType.TEACHER) {
             modelMap.addAttribute("messages", messageService.findAll());
@@ -27,13 +28,13 @@ public class MessageController {
         return "messages";
     }
 
-    @GetMapping("/message/send/{id}")
+    @GetMapping("/send/{id}")
     public String sendMessagePage(@PathVariable("id") int id, ModelMap modelMap) {
         modelMap.addAttribute("toUserId", id);
         return "sendMessage";
     }
 
-    @PostMapping("/message/send")
+    @PostMapping("/send")
     public String sendMessage(@ModelAttribute("currentUser") User currentUser,
                               @RequestParam("messageText") String messageText,
                               @RequestParam("toUserId") int toUserId) {

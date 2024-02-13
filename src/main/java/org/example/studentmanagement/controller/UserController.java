@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 @Controller
+@RequestMapping(value = "/users")
 @RequiredArgsConstructor
 public class UserController {
 

@@ -28,8 +28,8 @@
         <td th:text="${teacher.name}"></td>
         <td th:text="${teacher.surname}"></td>
         <td th:text="${teacher.email}"></td>
-        <td><a th:href="@{'/teachers/update/'+${teacher.id}}">update</a></td>
-        <td><a th:href="@{'/teachers/delete/'+${teacher.id}}">delete</a></td>
+        <td><a th:href="@{'/users/teachers/update/'+${teacher.id}}">update</a></td>
+        <td><a th:href="@{'/users/teachers/delete/'+${teacher.id}}">delete</a></td>
     </tr>
     </tbody>
 </table>
